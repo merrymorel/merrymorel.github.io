@@ -6,7 +6,8 @@ This repo must be named `merrymorel.github.io`; GitHub Pages publishes it from `
 
 ## Files
 - `index.html` — the arcade: Merry Morel sign, four wooden game cards with pixel-art badges
-- `logo.png` — the Merry Morel banner at native resolution (248×125); the browser scales it with `image-rendering: pixelated`, so it stays crisp at any size
+- `logo-anim.webp` / `logo-anim.gif` — the animated banner at native resolution (248×125, 20 frames, 2.6 s). WebP is served first (40 KB); the GIF (261 KB) is the fallback. Both are pixel-identical to the 1240×625 source, which was an exact 5× nearest-neighbour upscale — the browser does that scaling instead.
+- `logo.png` — the still banner, shown when the device asks for reduced motion
 - `icon-192/512.png`, `apple-touch-icon.png` — the gold **M** badge from the sign, on forest dark
 - `spores.png` — tiling gold-dust overlay
 - `sw.js` — service worker: network-first for the page, cached for offline. Bump `CACHE` after any change.
