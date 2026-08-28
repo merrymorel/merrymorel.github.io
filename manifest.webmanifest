@@ -1,12 +1,12 @@
 {
-  "name": "Our Arcade",
-  "short_name": "Arcade",
-  "description": "Dino Island, Big Cat Island and Moto Stadium \u2014 one tap away.",
+  "name": "Merry Morel Arcade",
+  "short_name": "Merry Morel",
+  "description": "Dino Island, Big Cat Island, Moto Stadium and Wild Shot \u2014 one tap away.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#0f2a1a",
-  "theme_color": "#0f2a1a",
+  "background_color": "#101610",
+  "theme_color": "#101610",
   "icons": [
     {
       "src": "/icon-192.png",

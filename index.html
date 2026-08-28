@@ -5,45 +5,106 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="theme-color" content="#0f2a1a" />
+<meta name="theme-color" content="#101610" />
+<meta name="description" content="Merry Morel — four homemade games for the iPad." />
 <link rel="manifest" href="manifest.webmanifest" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="icon" href="icon-192.png" />
-<title>Our Arcade</title>
+<title>Merry Morel Arcade</title>
 <style>
-  :root{ --ink:#0a1f14; --jungle:#0f2a1a; --panel:rgba(15,42,26,.86); --cream:#fff4d6; --sun:#ffb347; --fern:#5ccf6a; --lagoon:#8fe3ff; --berry:#ff5f7a; --bark:#7a4b00; }
+  :root{
+    --night:#101610; --deep:#0b0f0b; --ink:#0b0602; --moss:#1f2a1e; --fern:#325c21;
+    --gold:#e8c25c; --cream:#f8dc90; --parch:#fff4d6;
+    --wood:#8c551a; --wood-dark:#6e3f15; --wood-lit:#a96c22; --rust:#a03a18;
+  }
   *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html,body{ margin:0; min-height:100%; background:radial-gradient(ellipse at 50% 0%, #1d4a2f, var(--jungle) 70%); color:var(--cream); font-family:"Arial Rounded MT Bold", ui-rounded, "Nunito", "Segoe UI", system-ui, sans-serif; user-select:none; -webkit-user-select:none; }
-  .wrap{ max-width:720px; margin:0 auto; padding:max(24px, env(safe-area-inset-top)) 18px 40px; }
-  h1{ text-align:center; margin:8px 0 2px; font-size:clamp(34px, 8vw, 56px); letter-spacing:3px; color:var(--sun); text-shadow:0 4px 0 var(--bark), 0 8px 18px rgba(0,0,0,.4); }
-  .sub{ text-align:center; margin:0 0 22px; opacity:.85; font-weight:700; }
-  .games{ display:grid; gap:16px; grid-template-columns:1fr; }
-  @media (min-width:640px){ .games{ grid-template-columns:repeat(2,1fr); } } @media (min-width:900px){ .games{ grid-template-columns:repeat(4,1fr); } }
-  a.game{ display:flex; flex-direction:column; align-items:center; gap:10px; text-decoration:none; color:var(--cream); background:var(--panel); border:3px solid var(--ink); border-radius:22px; box-shadow:0 8px 0 #061510, 0 12px 26px rgba(0,0,0,.35); padding:22px 16px 18px; transition:transform .08s; }
-  a.game:active{ transform:translateY(4px); box-shadow:0 4px 0 #061510; }
-  .px{ image-rendering:pixelated; image-rendering:-webkit-crisp-edges; image-rendering:crisp-edges; }
-  .game .nm{ font-size:22px; font-weight:900; letter-spacing:1px; }
-  .game .tag{ font-size:13px; opacity:.85; text-align:center; }
-  .game .btn{ margin-top:6px; padding:12px 26px; border-radius:16px; border:3px solid var(--ink); background:var(--fern); color:#06230d; font-weight:900; font-size:18px; box-shadow:0 5px 0 #061510; }
-  .game.cats .btn{ background:var(--sun); color:#3a2300; } .game.moto .btn{ background:var(--lagoon); color:#0b2a3a; } .game.hunt .btn{ background:var(--berry); color:#3a0a14; }
-  .foot{ text-align:center; font-size:12px; opacity:.6; margin-top:28px; }
+  html,body{ margin:0; min-height:100%; background:var(--night); color:var(--parch);
+    font-family:"Arial Rounded MT Bold", ui-rounded, "Nunito", "Segoe UI", system-ui, sans-serif; user-select:none; -webkit-user-select:none; }
+  body{ background-image:url(spores.png), radial-gradient(ellipse 120% 70% at 50% -10%, #1c2a1a 0%, var(--night) 55%, var(--deep) 100%);
+    background-repeat:repeat, no-repeat; background-attachment:fixed; }
+  .wrap{ max-width:1040px; margin:0 auto; padding:max(10px, env(safe-area-inset-top)) 16px 44px; }
+  /* hero: the sign itself is the title */
+  .hero{ display:block; width:100%; max-width:992px; margin:0 auto; height:auto;
+    image-rendering:pixelated; image-rendering:-webkit-crisp-edges; image-rendering:crisp-edges; }
+  h1.sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+  .sub{ text-align:center; margin:2px 0 20px; color:var(--gold); font-size:15px; letter-spacing:4px; text-transform:uppercase; opacity:.9; }
+  .sub b{ color:var(--cream); }
+  /* forest floor rule */
+  .rule{ display:flex; align-items:center; gap:10px; justify-content:center; margin:0 auto 22px; max-width:520px; opacity:.75; }
+  .rule i{ flex:1; height:3px; background:linear-gradient(90deg, transparent, var(--wood-lit), transparent); }
+  .rule span{ width:9px; height:9px; background:var(--gold); transform:rotate(45deg); }
+  /* wooden sign cards */
+  .games{ display:grid; gap:18px; grid-template-columns:1fr; }
+  @media (min-width:620px){ .games{ grid-template-columns:repeat(2,1fr); } }
+  @media (min-width:980px){ .games{ grid-template-columns:repeat(4,1fr); } }
+  a.game{ position:relative; display:flex; flex-direction:column; align-items:center; gap:9px; text-decoration:none; color:var(--parch);
+    padding:20px 14px 18px; border:3px solid var(--ink); border-radius:10px;
+    background:
+      repeating-linear-gradient(180deg, rgba(0,0,0,.16) 0 2px, rgba(255,255,255,.04) 2px 4px, transparent 4px 22px),
+      linear-gradient(170deg, var(--wood-lit) 0%, var(--wood) 45%, var(--wood-dark) 100%);
+    box-shadow:0 7px 0 #2a1a08, 0 14px 26px rgba(0,0,0,.5), inset 0 0 0 2px rgba(248,220,144,.35);
+    transition:transform .07s ease-out, box-shadow .07s ease-out; }
+  a.game:active{ transform:translateY(5px); box-shadow:0 2px 0 #2a1a08, 0 6px 14px rgba(0,0,0,.5), inset 0 0 0 2px rgba(248,220,144,.35); }
+  /* two gold nails, like the sign in the logo */
+  a.game::before, a.game::after{ content:""; position:absolute; top:8px; width:7px; height:7px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, var(--cream), var(--wood-dark)); box-shadow:0 1px 0 rgba(0,0,0,.5); }
+  a.game::before{ left:9px; } a.game::after{ right:9px; }
+  /* a little gold badge, like the framed M on the sign */
+  .plate{ display:flex; align-items:center; justify-content:center; width:112px; height:112px; border-radius:8px;
+    background:linear-gradient(165deg, var(--parch) 0%, var(--cream) 55%, var(--gold) 100%); border:3px solid var(--ink);
+    box-shadow:inset 0 0 0 3px rgba(169,108,34,.55), inset 0 -6px 12px rgba(169,108,34,.35), 0 3px 0 rgba(0,0,0,.35); }
+  .px{ image-rendering:pixelated; image-rendering:-webkit-crisp-edges; image-rendering:crisp-edges; width:84px; height:84px; }
+  .nm{ font-size:21px; font-weight:900; letter-spacing:.5px; color:var(--cream); text-shadow:0 2px 0 rgba(0,0,0,.55); }
+  .tag{ font-size:12.5px; line-height:1.35; text-align:center; color:#f0e0bc; opacity:.92; min-height:34px; }
+  .btn{ margin-top:2px; padding:11px 30px; border-radius:9px; border:3px solid var(--ink);
+    background:linear-gradient(180deg, var(--cream), var(--gold)); color:#3a2300; font-weight:900; font-size:18px; letter-spacing:1px;
+    box-shadow:0 4px 0 #6e4a00; }
+  .foot{ display:flex; align-items:center; justify-content:center; gap:10px; margin-top:30px; color:#c9bfa2; font-size:12px; opacity:.8; text-align:center; }
+  .foot img{ image-rendering:pixelated; width:26px; height:26px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>OUR ARCADE</h1>
-  <p class="sub">Pick a game 🕹️</p>
+  <h1 class="sr">Merry Morel Arcade</h1>
+  <img class="hero" src="logo.png" width="248" height="125" alt="Merry Morel" />
+  <p class="sub">Pick a <b>game</b></p>
+  <div class="rule"><i></i><span></span><i></i></div>
   <div class="games">
-    <a class="game dino" href="./dino-island/"><canvas class="px" data-ico="rex" width="16" height="16"></canvas><div class="nm">Dino Island</div><div class="tag">Hatch a dinosaur, eat, grow, rescue eggs</div><div class="btn">Play</div></a>
-    <a class="game cats" href="./big-cat-island/"><canvas class="px" data-ico="lion" width="16" height="16"></canvas><div class="nm">Big Cat Island</div><div class="tag">Wake up a cub, hunt, lead the pride</div><div class="btn">Play</div></a>
-    <a class="game hunt" href="./wild-shot/"><canvas class="px" data-ico="crosshair" width="16" height="16"></canvas><div class="nm">Wild Shot</div><div class="tag">Tag the wildlife, spare the farm</div><div class="btn">Play</div></a>
-    <a class="game moto" href="./moto-stadium/"><canvas class="px" data-ico="bike" width="16" height="16"></canvas><div class="nm">Moto Stadium</div><div class="tag">Race, jump, whip, win</div><div class="btn">Play</div></a>
+      <a class="game" href="./dino-island/">
+        <span class="plate"><canvas class="px" data-ico="rex" width="16" height="16"></canvas></span>
+        <span class="nm">Dino Island</span>
+        <span class="tag">Hatch a dinosaur, eat, grow,<br>rescue lost eggs</span>
+        <span class="btn">Play</span>
+      </a>
+      <a class="game" href="./big-cat-island/">
+        <span class="plate"><canvas class="px" data-ico="lion" width="16" height="16"></canvas></span>
+        <span class="nm">Big Cat Island</span>
+        <span class="tag">Wake up a cub, hunt,<br>lead the pride</span>
+        <span class="btn">Play</span>
+      </a>
+      <a class="game" href="./moto-stadium/">
+        <span class="plate"><canvas class="px" data-ico="bike" width="16" height="16"></canvas></span>
+        <span class="nm">Moto Stadium</span>
+        <span class="tag">Race, jump, whip,<br>win the trophy</span>
+        <span class="btn">Play</span>
+      </a>
+      <a class="game" href="./wild-shot/">
+        <span class="plate"><canvas class="px" data-ico="crosshair" width="16" height="16"></canvas></span>
+        <span class="nm">Wild Shot</span>
+        <span class="tag">Tag the wildlife,<br>spare the farm</span>
+        <span class="btn">Play</span>
+      </a>
   </div>
-  <p class="foot">Add this page to the Home Screen and every game is one tap away. Games save on this device.</p>
+  <div class="foot"><img src="icon-192.png" alt="" /><span>Add this page to the Home Screen and every game is one tap away.<br>Games save on this device.</span></div>
 </div>
 <script>
-const PAL={"k": "#0a1f14", "g": "#2c8a58", "G": "#5ccf6a", "L": "#a8ec7c", "j": "#1a4a2a", "o": "#d8741f", "A": "#ffb347", "Y": "#ffe9a8", "r": "#b5305c", "R": "#ff5f7a", "P": "#ff9fb0", "b": "#2f6fbf", "B": "#8fe3ff", "C": "#dffaff", "d": "#5a3a3e", "D": "#8a5a3a", "T": "#d9b48a", "w": "#cbbfa8", "W": "#fff4d6", "X": "#ffffff", "s": "#4c5566", "S": "#8a96a8", "H": "#c6cfdc", "p": "#9d7bff"}; const PX={"rex": ["................", "........kkkkkk..", ".......kGLGGGGk.", ".......kGkGGGGGk", ".......kGGGGGGGk", ".......kGGkWkWkk", "..kk..kGGGkkkkk.", ".kGGkkGGGGGGkk..", ".kGGGGGGGGGGkkk.", "..kkGGGGGGGGGgk.", "....kGGGGGGGgk..", ".....kkGGkGgk...", "......kGGk.kGk..", "......kGGk.kGk..", ".....kkkkk.kkkk.", "................"], "lion": ["................", "........kkkkk...", ".......kDDDDDk..", "......kDkTTTkDk.", ".kk...kDkTkTkDk.", "kTTkkkkDTTTTTDk.", "kkTTTTTTkTTWTkk.", "..kTTTTTTkkkk...", "..kTTTTTTTTTk...", "..kTTTTTTTTTk...", "...kTkkTkkTk....", "...kTk.kTkTk....", "...kTk.kTkTk....", "...kTk.kTkTk....", "..kkkk.kkkkkk...", "................"], "bike": ["................", "........kkk.....", ".......kAAAk....", "..kk...kAAAAk...", "..kkk.kkkkkkk...", "...kkkAAAAAkk...", "...kkAAAAAAkkk..", "..kkkkkAAAkkkkk.", ".kSSSkkkkkkkSSSk", "kSkkSkksskkSkkSk", "kSk.kSkkkkkSk.kS", "kSkkSk.....kSkkS", ".kSSSk.....kSSSk", "..kkk.......kkk.", "................", "................"], "gamepad": ["................", "................", "................", "...kkkkkkkkkk...", "..kSSSSSSSSSSk..", ".kSSkkSSSSSSSSk.", ".kSkkkkSSSRSSSk.", ".kSSkkSSSAkkSSk.", ".kSSSSSSSSSSSSk.", "..kSSSSSSSSSSk..", "...kkkkkkkkkk...", "................", "................", "................", "................", "................"], "trophy": ["................", "..kkkkkkkkkkkk..", "..kAYAAAAAAAAk..", ".kkAYAAAAAAAAkk.", ".kAkAAAAAAAAkAk.", ".kAkAAAAAAAAkAk.", ".kkkAAAAAAAAkkk.", "...kAAAAAAAAk...", "....kAAAAAAk....", ".....kkAAkk.....", "......kAAk......", "......kAAk......", "....kkkAAkkk....", "...kDDDDDDDDk...", "...kkkkkkkkkk...", "................"], "crosshair": ["................", ".......kk.......", ".......kk.......", ".....kkkkkk.....", "....kkR..Rkk....", "...kkR....Rkk...", "..kkR......Rkk..", "kkkkR......Rkkkk", "kkkkR......Rkkkk", "..kkR......Rkk..", "...kkR....Rkk...", "....kkR..Rkk....", ".....kkkkkk.....", ".......kk.......", ".......kk.......", "................"]};
-document.querySelectorAll('canvas[data-ico]').forEach(c=>{ const g=PX[c.dataset.ico]; const S=6; c.width=16*S; c.height=16*S; c.style.width='96px'; c.style.height='96px'; const x=c.getContext('2d'); for(let y=0;y<16;y++) for(let i=0;i<16;i++){ const ch=g[y][i]; if(ch==='.') continue; x.fillStyle=PAL[ch]; x.fillRect(i*S,y*S,S,S); } });
+const PAL={"k": "#0a1f14", "g": "#2c8a58", "G": "#5ccf6a", "L": "#a8ec7c", "j": "#1a4a2a", "o": "#d8741f", "A": "#ffb347", "Y": "#ffe9a8", "r": "#b5305c", "R": "#ff5f7a", "P": "#ff9fb0", "b": "#2f6fbf", "B": "#8fe3ff", "C": "#dffaff", "d": "#5a3a3e", "D": "#8a5a3a", "T": "#d9b48a", "w": "#cbbfa8", "W": "#fff4d6", "X": "#ffffff", "s": "#4c5566", "S": "#8a96a8", "H": "#c6cfdc", "p": "#9d7bff"};
+const PX={"rex": ["................", "........kkkkkk..", ".......kGLGGGGk.", ".......kGkGGGGGk", ".......kGGGGGGGk", ".......kGGkWkWkk", "..kk..kGGGkkkkk.", ".kGGkkGGGGGGkk..", ".kGGGGGGGGGGkkk.", "..kkGGGGGGGGGgk.", "....kGGGGGGGgk..", ".....kkGGkGgk...", "......kGGk.kGk..", "......kGGk.kGk..", ".....kkkkk.kkkk.", "................"], "lion": ["................", "........kkkkk...", ".......kDDDDDk..", "......kDkTTTkDk.", ".kk...kDkTkTkDk.", "kTTkkkkDTTTTTDk.", "kkTTTTTTkTTWTkk.", "..kTTTTTTkkkk...", "..kTTTTTTTTTk...", "..kTTTTTTTTTk...", "...kTkkTkkTk....", "...kTk.kTkTk....", "...kTk.kTkTk....", "...kTk.kTkTk....", "..kkkk.kkkkkk...", "................"], "bike": ["................", "........kkk.....", ".......kAAAk....", "..kk...kAAAAk...", "..kkk.kkkkkkk...", "...kkkAAAAAkk...", "...kkAAAAAAkkk..", "..kkkkkAAAkkkkk.", ".kSSSkkkkkkkSSSk", "kSkkSkksskkSkkSk", "kSk.kSkkkkkSk.kS", "kSkkSk.....kSkkS", ".kSSSk.....kSSSk", "..kkk.......kkk.", "................", "................"], "gamepad": ["................", "................", "................", "...kkkkkkkkkk...", "..kSSSSSSSSSSk..", ".kSSkkSSSSSSSSk.", ".kSkkkkSSSRSSSk.", ".kSSkkSSSAkkSSk.", ".kSSSSSSSSSSSSk.", "..kSSSSSSSSSSk..", "...kkkkkkkkkk...", "................", "................", "................", "................", "................"], "trophy": ["................", "..kkkkkkkkkkkk..", "..kAYAAAAAAAAk..", ".kkAYAAAAAAAAkk.", ".kAkAAAAAAAAkAk.", ".kAkAAAAAAAAkAk.", ".kkkAAAAAAAAkkk.", "...kAAAAAAAAk...", "....kAAAAAAk....", ".....kkAAkk.....", "......kAAk......", "......kAAk......", "....kkkAAkkk....", "...kDDDDDDDDk...", "...kkkkkkkkkk...", "................"], "crosshair": ["................", ".......kk.......", ".......kk.......", ".....kkkkkk.....", "....kkR..Rkk....", "...kkR....Rkk...", "..kkR......Rkk..", "kkkkR......Rkkkk", "kkkkR......Rkkkk", "..kkR......Rkk..", "...kkR....Rkk...", "....kkR..Rkk....", ".....kkkkkk.....", ".......kk.......", ".......kk.......", "................"]};
+document.querySelectorAll('canvas[data-ico]').forEach(c=>{
+  const g=PX[c.dataset.ico]; if(!g) return; const S=8; c.width=16*S; c.height=16*S;
+  const x=c.getContext('2d');
+  for(let y=0;y<16;y++) for(let i=0;i<16;i++){ const ch=g[y][i]; if(ch==='.') continue; x.fillStyle=PAL[ch]; x.fillRect(i*S,y*S,S,S); }
+});
 if('serviceWorker' in navigator && location.protocol==='https:'){ window.addEventListener('load', ()=>{ navigator.serviceWorker.register('sw.js', { updateViaCache:'none' }).catch(()=>{}); }); }
 </script>
 </body>
