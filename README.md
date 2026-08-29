@@ -1,6 +1,6 @@
 # Merry Morel Arcade
 
-The launcher page for the games at https://merrymorel.github.io/ — Dino Island, Big Cat Island, Moto Stadium, Wild Shot, Little Eye and Little Chef.
+The launcher page for the games at https://merrymorel.github.io/ — Dino Island, Big Cat Island, Moto Stadium, Wild Shot, Little Eye, Little Chef and Little Maestro.
 
 This repo must be named `merrymorel.github.io`; GitHub Pages publishes it from `main` automatically. Add the page to the Home Screen and every game is one tap away.
 
